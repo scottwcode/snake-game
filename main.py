@@ -1,3 +1,12 @@
+# Snake-game
+# This game plays 'snake' by allowing the user to control a 'snake' with the arrow
+# keys and grow as the 'snake' eats 'food' randomly placed in the field of play.
+# Rules
+# -The snake cannot do a 180 by changing in the opposite direction
+# -The score increases by 1 whenever the snake eats (runs over) 'food'
+# -The game ends whenever the snake eats itself or hits a wall
+# -A High Score is kept on screen with the highest score achieved
+
 from turtle import Screen, Turtle
 from snake import Snake
 from food import Food
@@ -40,15 +49,15 @@ while game_on:
 
     # Detect collision with wall
     if snake.head.xcor() > WALL_PROXIMITY or snake.head.xcor() < -WALL_PROXIMITY or snake.head.ycor() > WALL_PROXIMITY or snake.head.ycor() < -WALL_PROXIMITY:
-        game_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
 
     # Detect collision with tail
     # for segment in snake.segments:
     #     if segment != snake.head and snake.head.distance(segment) < TAIL_PROXIMITY:
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < TAIL_PROXIMITY:
-            game_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()
